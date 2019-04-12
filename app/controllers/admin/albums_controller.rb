@@ -17,7 +17,7 @@ class Admin::AlbumsController < ApplicationController
 
   
   def create
-    @album = Album.new(song_albums)
+    @album = Album.new(albums_params)
     if @album.save
       redirect_to admin_album_path(@album), notice: 'Album was successfully created.'
     else
@@ -26,8 +26,8 @@ class Admin::AlbumsController < ApplicationController
   end
 
   def update
-    @album = SongAlbumfind(params[:id])
-    if @album.update(song_albums)
+    @album = Album.find(params[:id])
+    if @album.update(albums_params)
       redirect_to admin_album_path(@album), notice: 'Album was successfully updated.'
     else
       render :edit
@@ -44,7 +44,7 @@ class Admin::AlbumsController < ApplicationController
     @album = Album.find(params[:id])
   end
 
-  def song_albums
+  def albums_params
     params.require(:album).permit(:title ,:rating)
   end
 end
