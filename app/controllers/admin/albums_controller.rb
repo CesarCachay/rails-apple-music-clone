@@ -45,6 +45,6 @@ class Admin::AlbumsController < ApplicationController
   end
 
   def albums_params
-    params.require(:album).permit(:title ,:rating)
+    params.require(:album).permit(:title)
   end
 end
