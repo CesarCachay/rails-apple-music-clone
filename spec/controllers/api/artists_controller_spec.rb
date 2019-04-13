@@ -1,17 +1,28 @@
 require 'rails_helper'
+
+NEW_ARTIST = {name: "Nujabes", age: "31"}
+def createArtist
+  Artist.create(NEW_ARTIST)
+end
 describe Api::ArtistsController do
   before do
-    @artist = Artist.create(name: "Nujabes", age: "31")
+    Artist.delete_all
   end
-
-  describe 'GET' do
+  describe 'GET index' do
     it 'returns http status ok' do
       get :index
       expect(response).to have_http_status(:ok)
     end
     it 'returns http status ok when get one movie data' do
-      get :index, params: {id: @artist.id}
+      artist = createArtist
+      get :index, params: {id: artist.id}
       expect(response).to have_http_status(:ok)
+    end
+    it 'render json with all artists' do
+      createArtist
+      get :index
+      artists = JSON.parse(response.body)
+      expect(artists.size).to eq 1
     end
   end
 
