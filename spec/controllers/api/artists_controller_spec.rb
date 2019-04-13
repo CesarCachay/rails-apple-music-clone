@@ -25,5 +25,22 @@ describe Api::ArtistsController do
       expect(artists.size).to eq 1
     end
   end
+  describe 'GET show' do
+    it 'returns http status ok' do
+      artist = createArtist
+      get :show, params: { id: artist.id }
+      expect(response).to have_http_status(:ok)
+    end
+    it 'render the correct user' do
+      artist = createArtist
+      get :show, params: { id: artist.id }
+      expected_artist = JSON.parse(response.body)
+      expect(expected_artist["id"]).to eq(artist.id)
+    end
+    it 'returns http status not found' do
+      get :show, params: { id: 'x'}
+      expect(response).to have_http_status(:not_found)
+    end
+  end
 
 end
