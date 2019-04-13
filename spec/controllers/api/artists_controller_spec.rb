@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-require 'rails_helper'
-=======
 require 'rails_helper'
 describe Api::ArtistsController do
   before do
@@ -19,4 +16,3 @@ describe Api::ArtistsController do
   end
 
 end
->>>>>>> master
