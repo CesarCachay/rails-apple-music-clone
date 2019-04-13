@@ -10,6 +10,14 @@ class Api::ArtistsController < ApplicationController
       render json: @artist.as_json(except: [:created_at, :updated_at])
     end
   end
+  def search
+    artist = Artist.search(params[:search])
+    if artist.empty?
+      render json: artist, status: :not_found
+    else
+      render json: artist.as_json(except: [:id, :created_at, :updated_at])
+    end
+  end
   rescue_from ActiveRecord::RecordNotFound do |e|
 		render json: { message: e.message }, status: :not_found
 	end

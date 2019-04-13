@@ -4,6 +4,7 @@ NEW_ARTIST = {name: "Nujabes", age: "31"}
 def createArtist
   Artist.create(NEW_ARTIST)
 end
+
 describe Api::ArtistsController do
   before do
     Artist.delete_all
@@ -39,6 +40,23 @@ describe Api::ArtistsController do
     end
     it 'returns http status not found' do
       get :show, params: { id: 'x'}
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+  describe 'GET search' do
+    it 'returns http status ok' do
+      artist = createArtist
+      get :search, params: { search: artist.name }
+      expect(response).to have_http_status(:ok)
+    end
+    it 'returns list related to the search' do
+      createArtist 
+      get :search, params: {search: 'uj'}
+      artists = JSON.parse(response.body)
+      expect(artists.count).to eq 1
+    end
+    it 'returns http status not found' do
+      get :search, params: { search: 'xxx' }
       expect(response).to have_http_status(:not_found)
     end
   end
