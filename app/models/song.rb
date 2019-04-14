@@ -14,4 +14,5 @@ class Song < ApplicationRecord
       errors.add(:progress, "progress must less than duration")
     end
   end
+
 end
