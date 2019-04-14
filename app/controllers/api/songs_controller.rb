@@ -20,5 +20,3 @@ class Api::SongsController < ApplicationController
   def albums
     render json: Song.find(params[:song_id]).albums
   end
-end
-  
