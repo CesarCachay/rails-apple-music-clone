@@ -14,5 +14,8 @@ class Song < ApplicationRecord
       errors.add(:progress, "progress must less than duration")
     end
   end
+  def self.search(search_title)
+    self.where("title LIKE ?", "%#{search_title}%")
+  end
 
 end
