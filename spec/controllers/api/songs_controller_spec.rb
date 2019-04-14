@@ -4,7 +4,7 @@ describe Api::SongsController do
   before do
     @song = Song.create(
       title: "Song1",
-      duration: 4,
+      duration: 60,
       rating: 10,
       progress: 3
     )
@@ -40,60 +40,52 @@ describe Api::SongsController do
   end
 
   # GET /api/songs/:id/artists
-  describe 'GET artists' do
+  describe 'GET show artists per song' do
     it 'returns http status ok' do
-      get :artists, params: { song_id: @song }
+      get :show, params: { id: @song.id, resource: 'artists' }
       expect(response).to have_http_status(:ok)
     end
 
     it 'render the correct artists' do
         @song.artists << Artist.create(name: "MAluma")
-        get :artists, params: { song_id: @song }
+        get :show, params: { id: @song.id, resource:'artists' }
         artists_list = JSON.parse(response.body)
         expect(artists_list.size).to eq 1
     end
   end
 
   # GET /api/songs/:id/albums
-  describe 'GET albums' do
+  describe 'GET show albums per song' do
     it 'returns http status ok' do
-      get :albums, params: { song_id: @song }
+      get :show, params: { id: @song.id, resource:'albums' }
       expect(response).to have_http_status(:ok)
     end
 
     it 'render the correct albums' do
         @song.albums << Album.create(title: "Album1")
-        get :albums, params: { song_id: @song }
+        get :show, params: { id: @song, resource:'albums' }
         albums_list = JSON.parse(response.body)
         expect(albums_list.size).to eq 1
     end
   end
 
-  # GET /api/songs/search
-  # (Completar)
+  describe "PATCH update progress" do
+    it "returns http status ok" do
+      patch :update, params: { 
+        song_id: @song,
+        progress: 10
+      }
+      expect(response).to have_http_status(:ok)
+    end
 
-  # PATCH /api/songs/:id/progress
-  # (Completar)
-
-  # PATCH /api/songs/:id/rating
-  # (Arreglar)
-  # describe "PATCH update rating" do
-  #   it "returns http status ok" do
-  #     patch :rating, params: { 
-  #       id: @song,
-  #       rating: 1
-  #     }
-  #     expect(response).to have_http_status(:ok)
-  #   end
-
-  #   it "returns the updated @song" do
-  #     patch :rating, params: { 
-  #       id: @song,
-  #       rating: 1
-  #     }
-  #     expected_song = JSON.parse(response.body)
-  #     expect(expected_song["rating"]).to eq(1)
-  #   end
-  # end
+    it "returns the updated song" do
+      patch :update, params: { 
+        song_id: @song,
+        progress: 10
+      }
+      expected_song = JSON.parse(response.body)
+      expect(expected_song["progress"]).to eq(10)
+    end
+  end
 
 end
