@@ -1,7 +1,16 @@
 class Artist < ApplicationRecord
   has_and_belongs_to_many :songs, join_table: 'associations', dependent: :delete_all
   has_and_belongs_to_many :albums, join_table: 'associations', dependent: :delete_all
+<<<<<<< HEAD
   
   validates :name, presence: true, length: {minimum: 1, maximum: 50}
+=======
+  validates :name, presence: true
+>>>>>>> master
   validates :age, presence: false
+
+  def self.search(search_name)
+    self.where("name LIKE ?", "%#{search_name}%")
+  end
+
 end
