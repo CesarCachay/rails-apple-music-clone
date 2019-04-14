@@ -68,4 +68,33 @@ describe Api::SongsController do
         expect(albums_list.size).to eq 1
     end
   end
+
+  # GET /api/songs/search
+
+  # PATCH /api/songs/:id/progress
+
+  # PATCH /api/songs/:id/rating
+  # describe "PATCH update rating" do
+  #   it "returns http status ok" do
+  #     patch :rating, params: { 
+  #       id: @song,
+  #       rating: 1
+  #     }
+  #     expect(response).to have_http_status(:ok)
+  #   end
+
+  #   it "returns the updated @song" do
+  #     patch :rating, params: { 
+  #       id: @song,
+  #       rating: 1
+  #     }
+  #     expected_song = JSON.parse(response.body)
+  #     expect(expected_song["rating"]).to eq(1)
+  #   end
+  # end
+
+
+  asas
+  asasas
+  status
 end
