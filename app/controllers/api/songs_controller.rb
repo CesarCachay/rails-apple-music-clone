@@ -5,12 +5,28 @@ class Api::SongsController < ApplicationController
   end
 
   def show 
-      @song = Song.find(params[:id])
-      if params[:resource]
-        render json: @song.send(params[:resource])
-      else
-        render json: @song.as_json(except: [:created_at, :updated_at])
-      end
+    @song = Song.find(params[:id])
+    if params[:resource]
+      render json: @song.send(params[:resource])
+    else
+      render json: @song.as_json(except: [:created_at, :updated_at])
+    end
   end
-end
+
+  def update
+    @song = Song.find(params[:song_id])
+    @song[:progress] = params[:progress]
+    @song.save
+    render json: @song.as_json(only:['progress'])
+  end
+
+  def search
+    @song = Song.search(params[:search])
+    if @song.empty?
+      render json: @song, status: :not_found
+    else
+      render json: @song.as_json(except: [:id, :created_at, :updated_at])
+    end
+  end
   
+end
