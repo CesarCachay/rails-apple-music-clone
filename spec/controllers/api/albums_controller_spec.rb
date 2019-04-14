@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-require 'rails_helper'
-=======
 require 'rails_helper'
 
 RSpec.describe Api::AlbumsController, type: :controller do
@@ -128,4 +125,3 @@ RSpec.describe Api::AlbumsController, type: :controller do
   end
 
 end
->>>>>>> master

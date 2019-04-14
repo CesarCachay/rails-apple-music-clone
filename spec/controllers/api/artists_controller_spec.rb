@@ -59,8 +59,4 @@ describe Api::ArtistsController do
       expect(response).to have_http_status(:not_found)
     end
   end
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 end

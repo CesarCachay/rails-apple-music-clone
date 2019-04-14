@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     resources :songs, only: [:index, :show] do
-      get 'artists'
-      get 'albums'
+      get ':resource', to: 'songs#index'
       patch 'progress', to: 'songs#update'
       get 'search', on: :collection
     end
