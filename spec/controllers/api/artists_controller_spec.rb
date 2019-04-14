@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-NEW_ARTIST = {name: "Nujabes", age: "31"}
 def createArtist
-  Artist.create(NEW_ARTIST)
+  Artist.create(name: "Nujabes", age: "31")
 end
 
 describe Api::ArtistsController do
