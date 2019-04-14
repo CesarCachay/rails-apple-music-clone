@@ -9,6 +9,10 @@ a {
   text-decoration: none;
 }
 
+a[data-method='delete']:hover {
+  color: tomato;
+}
+
 nav {
   font-size: 14px;
   a {
