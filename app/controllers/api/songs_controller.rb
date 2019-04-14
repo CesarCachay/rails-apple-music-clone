@@ -5,7 +5,7 @@ class Api::SongsController < ApplicationController
   end
 
   def show 
-      @song = Song.find(params[:id]), status: :ok
+      @song = Song.find(params[:id])
       if params[:resource]
         render json: @song.send(params[:resource])
       else

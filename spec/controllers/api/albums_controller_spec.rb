@@ -124,8 +124,4 @@ RSpec.describe Api::AlbumsController, type: :controller do
     end
   end
 
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> aca8f11e079e321218d4fa723f09d6a0b6dd36cf
