@@ -70,10 +70,13 @@ describe Api::SongsController do
   end
 
   # GET /api/songs/search
+  # (Completar)
 
   # PATCH /api/songs/:id/progress
+  # (Completar)
 
   # PATCH /api/songs/:id/rating
+  # (Arreglar)
   # describe "PATCH update rating" do
   #   it "returns http status ok" do
   #     patch :rating, params: { 
@@ -93,8 +96,4 @@ describe Api::SongsController do
   #   end
   # end
 
-
-  asas
-  asasas
-  status
 end
