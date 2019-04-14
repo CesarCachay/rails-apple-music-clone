@@ -4,4 +4,9 @@ class Album < ApplicationRecord
   
   validates :title, presence: true
   validates :rating, presence: false
+
+  def self.search(search_title)
+    self.where("title LIKE ?", "%#{search_title}%")
+  end
+  
 end

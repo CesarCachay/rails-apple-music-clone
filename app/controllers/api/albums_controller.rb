@@ -5,7 +5,21 @@ class Api::AlbumsController < ApplicationController
   end
 
   def show
-    render json: Album.find(params[:id])
+    @album = Album.find(params[:id])
+    if params[:resource]
+      render json: @album.send(params[:resource])
+    else
+      render json: @album.as_json(except: [:created_at, :updated_at])
+    end
+  end
+
+  def search
+    @album = Album.search(params[:search])
+    if @album.empty?
+      render json: @album, status: :not_found
+    else
+      render json: @album.as_json(except: [:id, :created_at, :updated_at])
+    end
   end
 
   rescue_from ActiveRecord::RecordNotFound do |e|
